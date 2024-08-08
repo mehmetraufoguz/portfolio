@@ -1,14 +1,24 @@
 import GitHubCalendar from 'react-github-calendar'
 import './App.css'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useTheme } from './components/theme-provider'
+import { ModeToggle } from './components/mode-toggle'
 
 function App() {
+    const { theme } = useTheme();
     return (
         <>
-            <Avatar className='mt-10 mb-10'>
-                <AvatarImage src="https://avatars.githubusercontent.com/u/88249309" />
-                <AvatarFallback>MRO</AvatarFallback>
-            </Avatar>
+            <div className='grid grid-cols-12 items-center'>
+                <div className='col-span-10'>
+                    <Avatar className='mt-10 mb-10'>
+                        <AvatarImage src="https://avatars.githubusercontent.com/u/88249309" />
+                        <AvatarFallback>MRO</AvatarFallback>
+                    </Avatar>
+                </div>
+                <div className='col-span-2 text-right'>
+                    <ModeToggle />
+                </div>
+            </div>
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
                 Hello, this is Rauf 👋🏻
             </h1>
@@ -21,7 +31,7 @@ function App() {
             </h2>
             <p className='text-sm text-muted-foreground'>mostly private projects</p>
             <div className="mt-6 mb-6">
-                <GitHubCalendar showWeekdayLabels username="mehmetraufoguz" />
+                <GitHubCalendar showWeekdayLabels username="mehmetraufoguz" colorScheme={theme == "light" ? "light" : "dark"} />
             </div>
             <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-6 mb-6">
                 Featured Projects
@@ -30,12 +40,12 @@ function App() {
             <div className="mt-6 mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <a href='https://github.com/Metatime-Technology-Inc/genesis-contracts' target='_blank'>
-                        <img src='https://github-readme-stats.vercel.app/api/pin/?username=Metatime-Technology-Inc&repo=genesis-contracts' alt='genesis-contracts' />
+                        <img src={`https://github-readme-stats.vercel.app/api/pin/?username=Metatime-Technology-Inc&repo=genesis-contracts&theme=${theme}`} alt='genesis-contracts' />
                     </a>
                 </div>
                 <div>
                     <a href='https://github.com/Metatime-Technology-Inc/pool-contracts' target='_blank'>
-                        <img src='https://github-readme-stats.vercel.app/api/pin/?username=Metatime-Technology-Inc&repo=pool-contracts' alt='pool-contracts' />
+                        <img src={`https://github-readme-stats.vercel.app/api/pin/?username=Metatime-Technology-Inc&repo=pool-contracts&theme=${theme}`} alt='pool-contracts' />
                     </a>
                 </div>
             </div>
