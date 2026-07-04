@@ -1,9 +1,14 @@
+export type ProjectVisibility = 'public' | 'private'
+export type ProjectStatus = 'completed' | 'in-progress' | 'discontinued'
+
 export type Project = {
   slug: string
   title: string
   description: string
   date: string
-  github: string
+  visibility: ProjectVisibility
+  status: ProjectStatus
+  github?: string
   tags: readonly string[]
 }
 
@@ -17,12 +22,58 @@ export type BlogPost = {
 
 export const projects: readonly Project[] = [
   {
-    slug: 'example-project',
-    title: 'Example Project',
-    description: 'A short summary of what this project does and why it is worth a look.',
-    date: '2026-01-01',
-    github: 'https://github.com/your-username/your-repo',
-    tags: ['template'],
+    slug: 'aa-news-encoder',
+    title: 'aa-news-encoder',
+    description:
+      'Turkish news classification pipeline — AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.',
+    date: '2026-04-30',
+    visibility: 'public',
+    status: 'completed',
+    github: 'https://github.com/mehmetraufoguz/aa-news-encoder',
+    tags: ['nlp', 'turkish', 'bert', 'kafka'],
+  },
+  {
+    slug: 'app-documents',
+    title: 'app-documents',
+    description:
+      'Git-backed markdown document platform with magic-link auth and a publishable client SDK.',
+    date: '2026-03-08',
+    visibility: 'public',
+    status: 'in-progress',
+    github: 'https://github.com/mehmetraufoguz/app-documents',
+    tags: ['documents', 'git', 'full-stack', 'markdown'],
+  },
+  {
+    slug: 'job-applications',
+    title: 'Job Applications CLI',
+    description: 'Terminal UI for tracking job applications with Ink, Drizzle ORM, and embedded Postgres.',
+    date: '2025-12-05',
+    visibility: 'public',
+    status: 'completed',
+    github: 'https://github.com/mehmetraufoguz/job-applications',
+    tags: ['cli', 'ink', 'typescript', 'productivity'],
+  },
+  {
+    slug: 'genesis-contracts',
+    title: 'Genesis Contracts',
+    description:
+      'MetaChain genesis smart contracts — mining, validation, reward pools, and BSC bridging.',
+    date: '2023-09-27',
+    visibility: 'public',
+    status: 'completed',
+    github: 'https://github.com/mehmetraufoguz/genesis-contracts',
+    tags: ['solidity', 'ethereum', 'defi'],
+  },
+  {
+    slug: 'pool-contracts',
+    title: 'Pool Contracts',
+    description:
+      'Metatime Coin distribution pools with vesting, claiming, liquidity, and strategic burns.',
+    date: '2023-05-14',
+    visibility: 'public',
+    status: 'completed',
+    github: 'https://github.com/mehmetraufoguz/pool-contracts',
+    tags: ['solidity', 'token-distribution', 'defi'],
   },
 ] as const
 
@@ -54,4 +105,27 @@ export function formatDate(date: string): string {
     month: 'long',
     day: 'numeric',
   })
+}
+
+export function formatProjectVisibility(visibility: ProjectVisibility): string {
+  return visibility === 'public' ? 'Public' : 'Private'
+}
+
+export function formatProjectStatus(status: ProjectStatus): string {
+  switch (status) {
+    case 'completed':
+      return 'Completed'
+    case 'in-progress':
+      return 'In progress'
+    case 'discontinued':
+      return 'Discontinued'
+  }
+}
+
+export function formatProjectCardMeta(project: Pick<Project, 'date' | 'visibility' | 'status'>): string {
+  return `_${formatDate(project.date)} · ${formatProjectVisibility(project.visibility)} · ${formatProjectStatus(project.status)}_`
+}
+
+export function getProject(slug: string): Project | undefined {
+  return projects.find((project) => project.slug === slug)
 }

@@ -7,8 +7,8 @@ showFeedback: false
 ---
 
 import { sortByDateDesc, blogPosts } from '../_components/content'
-import { ContentCards } from '../_components/content-cards'
+import { BlogCards } from '../_components/content-cards'
 
 # Blog
 
-<ContentCards items={sortByDateDesc(blogPosts)} basePath="/blog" />
+<BlogCards items={sortByDateDesc(blogPosts)} />

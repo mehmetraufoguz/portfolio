@@ -1,0 +1,52 @@
+---
+title: Job Applications CLI
+description: Terminal UI for tracking job applications with Ink, Drizzle ORM, and embedded Postgres.
+date: 2025-12-05
+tags: [cli, ink, typescript, productivity]
+github: https://github.com/mehmetraufoguz/job-applications
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+import { ProjectMeta } from '../_components/project-meta'
+
+# Job Applications CLI [Terminal UI for tracking job applications with Ink, Drizzle ORM, and embedded Postgres.]
+
+<ProjectMeta slug="job-applications" />
+
+## Overview
+
+Personal CLI for tracking job applications entirely in the terminal. Add, list, update, and delete records for company, link, platform, and status — all stored locally in embedded Postgres with zero server setup.
+
+## Tech Stack
+
+| Layer | Technology |
+| --- | --- |
+| Language | TypeScript |
+| UI | Ink 6, React 19 |
+| Database | PGlite, Drizzle ORM |
+| Inputs | ink-form, ink-quicksearch-input, ink-select-input |
+
+## Getting Started
+
+```bash
+git clone https://github.com/mehmetraufoguz/job-applications
+cd job-applications
+npm install
+npm run drizzle:migrate
+npm run build && npm run start
+```
+
+## Key Features
+
+- **CRUD operations** — add, update, and delete application records.
+- **Table view** — paginated, color-coded list (8 rows per page).
+- **Quick search** — fast record selection with QuickSearchInput.
+- **Clickable links** — open job postings directly from the terminal.
+- **Local-first** — all data in embedded Postgres via PGlite, no cloud required.
+
+## Resources
+
+- [Repository on GitHub](https://github.com/mehmetraufoguz/job-applications)

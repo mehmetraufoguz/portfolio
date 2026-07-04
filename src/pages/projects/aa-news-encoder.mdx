@@ -1,0 +1,53 @@
+---
+title: aa-news-encoder
+description: Turkish news classification pipeline — AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.
+date: 2026-04-30
+tags: [nlp, turkish, bert, kafka, machine-learning]
+github: https://github.com/mehmetraufoguz/aa-news-encoder
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+import { ProjectMeta } from '../_components/project-meta'
+
+# aa-news-encoder [Turkish news classification pipeline — AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.]
+
+<ProjectMeta slug="aa-news-encoder" />
+
+## Overview
+
+Proof-of-concept for classifying Turkish news articles into 7 categories using a fine-tuned `dbmdz/bert-base-turkish-cased` model (~87% accuracy). Articles are ingested from the Anadolu Ajansı API, processed through a Kafka pipeline, and served via FastAPI/gRPC with a NestJS REST/SSE API and TanStack React dashboard.
+
+## Tech Stack
+
+| Layer | Technology |
+| --- | --- |
+| Services | NestJS, Python / FastAPI |
+| Messaging | Kafka, gRPC, REST, SSE |
+| Storage | PostgreSQL, Redis |
+| Model | HuggingFace Transformers, Turkish BERT |
+| Frontend | React, TanStack Router / Table |
+| Infrastructure | Docker Compose |
+
+## Architecture
+
+```text
+AA API → Producer → Kafka → Consumer → Model (FastAPI + gRPC)
+       → PostgreSQL + Redis → API (REST + SSE) → Dashboard
+```
+
+## Key Features
+
+- **Scheduled ingestion** — polls AA News API with Redis deduplication (SHA-256, 3h TTL).
+- **Fine-tuned BERT** — 7-category Turkish news classifier served over FastAPI and gRPC.
+- **Event-driven pipeline** — producer, consumer, and model as separate services.
+- **Management dashboard** — magic-link auth with live SSE updates.
+- **Dataset CLI** — local tool for collecting training data from Turkish news sources.
+
+## Resources
+
+- [Repository on GitHub](https://github.com/mehmetraufoguz/aa-news-encoder)
+- [Documentation](https://aa-news-encoder.rauf.app)
+- [Model on HuggingFace](https://huggingface.co/mehmetraufoguz/turkish-news-bert-base)
