@@ -24,7 +24,9 @@ export function ContentCards({ items, basePath }: ContentCardsProps) {
           title={item.title}
           description={item.description}
           topRight={
-            <span className="content-card-date">{formatDate(item.date)}</span>
+            <span className="vocs:text-xs vocs:text-secondary vocs:whitespace-nowrap">
+              {formatDate(item.date)}
+            </span>
           }
         />
       ))}
