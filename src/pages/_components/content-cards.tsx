@@ -22,12 +22,7 @@ export function ContentCards({ items, basePath }: ContentCardsProps) {
           key={item.slug}
           to={`${basePath}/${item.slug}`}
           title={item.title}
-          description={item.description}
-          topRight={
-            <span className="vocs:text-xs vocs:text-secondary vocs:whitespace-nowrap">
-              {formatDate(item.date)}
-            </span>
-          }
+          description={`_${formatDate(item.date)}_\n\n${item.description}`}
         />
       ))}
     </Cards>
