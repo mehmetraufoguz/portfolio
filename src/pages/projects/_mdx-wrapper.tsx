@@ -14,7 +14,7 @@ type Props = {
   }
 }
 
-export default function ProjectWrapper({ children, frontmatter }: Props) {
+export default function ProjectWrapper({ children, frontmatter = {} }: Props) {
   const { title, description, date, tags = [], github } = frontmatter
 
   return (

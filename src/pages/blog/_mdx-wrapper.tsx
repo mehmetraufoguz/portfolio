@@ -14,7 +14,7 @@ type Props = {
   }
 }
 
-export default function BlogWrapper({ children, frontmatter }: Props) {
+export default function BlogWrapper({ children, frontmatter = {} }: Props) {
   const { title, description, date, tags = [], author } = frontmatter
 
   return (
