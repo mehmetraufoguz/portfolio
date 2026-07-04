@@ -5,12 +5,5 @@ export default defineConfig({
   title: 'Rauf',
   description: 'Portfolio',
   colorScheme: 'light dark',
-  layout: 'minimal',
   topNav: [],
-  sidebar: [
-    {
-      text: 'Home',
-      link: '/',
-    },
-  ],
 })
