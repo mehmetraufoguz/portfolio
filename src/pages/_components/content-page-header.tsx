@@ -16,14 +16,13 @@ type PageFrontmatter = {
   tags?: readonly string[]
   github?: string
   author?: string
-  hideContentHeader?: boolean
 }
 
 export function ContentPageHeader({ eyebrow, showGithub }: ContentPageHeaderProps) {
   const { frontmatter } = MdxPageContext.use()
   const page = frontmatter as PageFrontmatter | undefined
 
-  if (!page || page.hideContentHeader) return null
+  if (!page) return null
 
   const { title, description, date, tags = [], github, author } = page
 
