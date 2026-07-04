@@ -1,9 +1,14 @@
+export type ProjectVisibility = 'public' | 'private'
+export type ProjectStatus = 'completed' | 'in-progress' | 'discontinued'
+
 export type Project = {
   slug: string
   title: string
   description: string
   date: string
-  github: string
+  visibility: ProjectVisibility
+  status: ProjectStatus
+  github?: string
   tags: readonly string[]
 }
 
@@ -22,6 +27,8 @@ export const projects: readonly Project[] = [
     description:
       'Turkish news classification pipeline — AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.',
     date: '2026-04-30',
+    visibility: 'public',
+    status: 'completed',
     github: 'https://github.com/mehmetraufoguz/aa-news-encoder',
     tags: ['nlp', 'turkish', 'bert', 'kafka'],
   },
@@ -31,6 +38,8 @@ export const projects: readonly Project[] = [
     description:
       'Git-backed markdown document platform with magic-link auth and a publishable client SDK.',
     date: '2026-03-08',
+    visibility: 'public',
+    status: 'in-progress',
     github: 'https://github.com/mehmetraufoguz/app-documents',
     tags: ['documents', 'git', 'full-stack', 'markdown'],
   },
@@ -39,6 +48,8 @@ export const projects: readonly Project[] = [
     title: 'Job Applications CLI',
     description: 'Terminal UI for tracking job applications with Ink, Drizzle ORM, and embedded Postgres.',
     date: '2025-12-05',
+    visibility: 'public',
+    status: 'completed',
     github: 'https://github.com/mehmetraufoguz/job-applications',
     tags: ['cli', 'ink', 'typescript', 'productivity'],
   },
@@ -48,6 +59,8 @@ export const projects: readonly Project[] = [
     description:
       'MetaChain genesis smart contracts — mining, validation, reward pools, and BSC bridging.',
     date: '2023-09-27',
+    visibility: 'public',
+    status: 'completed',
     github: 'https://github.com/mehmetraufoguz/genesis-contracts',
     tags: ['solidity', 'ethereum', 'defi'],
   },
@@ -57,6 +70,8 @@ export const projects: readonly Project[] = [
     description:
       'Metatime Coin distribution pools with vesting, claiming, liquidity, and strategic burns.',
     date: '2023-05-14',
+    visibility: 'public',
+    status: 'completed',
     github: 'https://github.com/mehmetraufoguz/pool-contracts',
     tags: ['solidity', 'token-distribution', 'defi'],
   },
@@ -90,4 +105,27 @@ export function formatDate(date: string): string {
     month: 'long',
     day: 'numeric',
   })
+}
+
+export function formatProjectVisibility(visibility: ProjectVisibility): string {
+  return visibility === 'public' ? 'Public' : 'Private'
+}
+
+export function formatProjectStatus(status: ProjectStatus): string {
+  switch (status) {
+    case 'completed':
+      return 'Completed'
+    case 'in-progress':
+      return 'In progress'
+    case 'discontinued':
+      return 'Discontinued'
+  }
+}
+
+export function formatProjectCardMeta(project: Pick<Project, 'date' | 'visibility' | 'status'>): string {
+  return `_${formatDate(project.date)} · ${formatProjectVisibility(project.visibility)} · ${formatProjectStatus(project.status)}_`
+}
+
+export function getProject(slug: string): Project | undefined {
+  return projects.find((project) => project.slug === slug)
 }

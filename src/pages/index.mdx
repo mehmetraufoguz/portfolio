@@ -6,7 +6,7 @@ showSearch: false
 showFeedback: false
 ---
 
-import { ContentCards } from './_components/content-cards'
+import { BlogCards, ProjectCards } from './_components/content-cards'
 import { getLatestBlogPosts, getLatestProjects } from './_components/content'
 import { GitHubContributions } from './_components/github-contributions'
 
@@ -26,10 +26,10 @@ import { GitHubContributions } from './_components/github-contributions'
 
 [View all →](/projects)
 
-<ContentCards items={getLatestProjects(3)} basePath="/projects" />
+<ProjectCards items={getLatestProjects(3)} />
 
 ## Latest Posts
 
 [View all →](/blog)
 
-<ContentCards items={getLatestBlogPosts(3)} basePath="/blog" />
+<BlogCards items={getLatestBlogPosts(3)} />
