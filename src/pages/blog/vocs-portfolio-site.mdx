@@ -1,0 +1,70 @@
+---
+title: Building a Portfolio Portal with Vocs
+description: Why Vocs works well for a personal site that mixes docs-style project pages with a blog — and how the layout system helps.
+date: 2026-03-10
+author: Rauf
+tags: [vocs, mdx, portfolio]
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+## The problem
+
+A portfolio site usually needs three things at once:
+
+1. A **landing page** with personality (avatar, bio, contribution graph).
+2. **Project pages** with real structure — not just GitHub pin cards.
+3. A **blog** for short notes on packages and tools.
+
+Most static site generators optimize for one of those. Documentation frameworks like Vocs already solve structured content, navigation, and MDX — they just need a light portfolio layer on top.
+
+## Why Vocs
+
+Vocs gives you file-based routing, three layout modes (`full`, `minimal`, `blank`), and `_mdx-wrapper.tsx` for section-specific chrome. That maps cleanly:
+
+| Section | Layout | Wrapper |
+| --- | --- | --- |
+| Home | `blank` + custom MDX | — |
+| Projects | `full` with sidebar | Project header + metadata |
+| Blog | `full` with sidebar | Post header + date/author |
+
+The homepage stays minimal and custom. Project and blog pages inherit the docs shell — sidebar nav, outline, search — without rebuilding it.
+
+## Portal pattern on the homepage
+
+Instead of embedding full project cards on `/`, the home page lists the **latest three** projects and posts and links out:
+
+```tsx
+<PortalPreview />
+```
+
+Each item routes to its own MDX page. The main page stays scannable; detail lives where it belongs.
+
+## Section wrappers
+
+Vocs passes frontmatter into `_mdx-wrapper.tsx`, so a blog post can declare:
+
+```yaml
+---
+title: My Post
+date: 2026-03-10
+author: Rauf
+tags: [react]
+---
+```
+
+…and the wrapper renders a consistent header before the MDX body. Same idea for project pages with GitHub links and tags.
+
+## Takeaways
+
+- Use **`layout: blank`** when you want full control (home).
+- Use **`layout: full`** for long-form project docs and blog posts.
+- Keep a **shared content manifest** (`content.ts`) so listings, the portal, and sidebars stay in sync.
+- Reach for **`_mdx-wrapper.tsx`** before custom layouts — it scopes UI to `/blog/*` or `/projects/*` without touching global config.
+
+## Links
+
+- [Vocs documentation](https://vocs.dev)
+- [Layouts guide](https://vocs.dev/features/layouts)
