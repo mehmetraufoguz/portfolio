@@ -6,8 +6,9 @@ showSearch: false
 showFeedback: false
 ---
 
+import { ContentCards } from './_components/content-cards'
+import { getLatestBlogPosts, getLatestProjects } from './_components/content'
 import { GitHubContributions } from './_components/github-contributions'
-import { PortalPreview } from './_components/portal-preview'
 
 ![Rauf](https://avatars.githubusercontent.com/u/88249309)
 
@@ -23,4 +24,14 @@ mostly private projects
 
 <GitHubContributions />
 
-<PortalPreview />
+## Latest Projects
+
+[View all →](/projects)
+
+<ContentCards items={getLatestProjects(3)} basePath="/projects" />
+
+## Latest Posts
+
+[View all →](/blog)
+
+<ContentCards items={getLatestBlogPosts(3)} basePath="/blog" />
