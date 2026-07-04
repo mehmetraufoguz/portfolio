@@ -17,39 +17,22 @@ export type BlogPost = {
 
 export const projects: readonly Project[] = [
   {
-    slug: 'genesis-contracts',
-    title: 'Genesis Contracts',
-    description: 'Core smart contract suite for the Genesis protocol — tokenomics, staking, and governance.',
-    date: '2025-06-01',
-    github: 'https://github.com/Metatime-Technology-Inc/genesis-contracts',
-    tags: ['solidity', 'ethereum', 'defi'],
-  },
-  {
-    slug: 'pool-contracts',
-    title: 'Pool Contracts',
-    description: 'Liquidity pool contracts with automated market-making and reward distribution.',
-    date: '2025-05-15',
-    github: 'https://github.com/Metatime-Technology-Inc/pool-contracts',
-    tags: ['solidity', 'amm', 'defi'],
+    slug: 'example-project',
+    title: 'Example Project',
+    description: 'A short summary of what this project does and why it is worth a look.',
+    date: '2026-01-01',
+    github: 'https://github.com/your-username/your-repo',
+    tags: ['template'],
   },
 ] as const
 
 export const blogPosts: readonly BlogPost[] = [
   {
-    slug: 'react-github-calendar',
-    title: 'react-github-calendar — A Clean Contribution Graph for React',
-    description:
-      'How I integrated a lightweight GitHub contribution calendar into this portfolio and what I learned along the way.',
-    date: '2026-03-20',
-    tags: ['react', 'packages', 'ui'],
-  },
-  {
-    slug: 'vocs-portfolio-site',
-    title: 'Building a Portfolio Portal with Vocs',
-    description:
-      'Why Vocs works well for a personal site that mixes docs-style project pages with a blog — and how the layout system helps.',
-    date: '2026-03-10',
-    tags: ['vocs', 'mdx', 'portfolio'],
+    slug: 'example-post',
+    title: 'Example Post',
+    description: 'A short intro to what this post covers — the package, tool, or idea you are writing about.',
+    date: '2026-01-01',
+    tags: ['template'],
   },
 ] as const
 
