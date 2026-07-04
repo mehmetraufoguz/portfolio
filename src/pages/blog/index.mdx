@@ -1,0 +1,14 @@
+---
+title: Blog
+description: Notes on packages, tools, and things worth sharing.
+layout: minimal
+showAskAi: false
+showFeedback: false
+---
+
+import { sortByDateDesc, blogPosts } from '../_components/content'
+import { ContentCards } from '../_components/content-cards'
+
+# Blog
+
+<ContentCards items={sortByDateDesc(blogPosts)} basePath="/blog" />

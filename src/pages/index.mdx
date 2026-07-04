@@ -6,7 +6,8 @@ showSearch: false
 showFeedback: false
 ---
 
-import { FeaturedProjects } from './_components/featured-projects'
+import { ContentCards } from './_components/content-cards'
+import { getLatestBlogPosts, getLatestProjects } from './_components/content'
 import { GitHubContributions } from './_components/github-contributions'
 
 ![Rauf](https://avatars.githubusercontent.com/u/88249309)
@@ -19,12 +20,16 @@ import { GitHubContributions } from './_components/github-contributions'
 
 ## Contributions
 
-mostly private projects
-
 <GitHubContributions />
 
-## Featured Projects
+## Latest Projects
 
-ta-daa 🥳
+[View all →](/projects)
 
-<FeaturedProjects />
+<ContentCards items={getLatestProjects(3)} basePath="/projects" />
+
+## Latest Posts
+
+[View all →](/blog)
+
+<ContentCards items={getLatestBlogPosts(3)} basePath="/blog" />

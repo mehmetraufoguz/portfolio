@@ -5,7 +5,16 @@ export default defineConfig({
   title: 'Rauf',
   description: 'Portfolio',
   colorScheme: 'light dark',
-  topNav: [],
+  topNav: [
+    { text: 'Home', link: '/' },
+    { text: 'Projects', link: '/projects' },
+    { text: 'Blog', link: '/blog' },
+  ],
+  sidebar: [
+    { text: 'Home', link: '/' },
+    { text: 'Projects', link: '/projects' },
+    { text: 'Blog', link: '/blog' },
+  ],
   socials: [
     { icon: 'github', link: 'https://github.com/mehmetraufoguz' },
     { icon: 'telegram', link: 'https://t.me/mehmetraufoguz' },

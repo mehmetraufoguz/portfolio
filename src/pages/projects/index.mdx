@@ -1,0 +1,14 @@
+---
+title: Projects
+description: Project pages with overview, setup, and notes.
+layout: minimal
+showAskAi: false
+showFeedback: false
+---
+
+import { sortByDateDesc, projects } from '../_components/content'
+import { ContentCards } from '../_components/content-cards'
+
+# Projects
+
+<ContentCards items={sortByDateDesc(projects)} basePath="/projects" />
