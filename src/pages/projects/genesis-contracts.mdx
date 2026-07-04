@@ -1,0 +1,51 @@
+---
+title: Genesis Contracts
+description: MetaChain genesis smart contracts — mining, validation, reward pools, and BSC bridging.
+date: 2023-09-27
+tags: [solidity, ethereum, defi, smart-contracts]
+github: https://github.com/mehmetraufoguz/genesis-contracts
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+# Genesis Contracts [MetaChain genesis smart contracts — mining, validation, reward pools, and BSC bridging.]
+
+*September 27, 2023* · solidity · ethereum · defi · [View on GitHub →](https://github.com/mehmetraufoguz/genesis-contracts)
+
+## Overview
+
+Core on-chain logic for the MetaChain network: block and transaction validation, tiered miner structures (Meta, Macro, Micro), reward distribution, and BSC↔MetaChain bridge contracts for MTC token migration. Documented against the Metatime whitepaper.
+
+## Tech Stack
+
+| Layer | Technology |
+| --- | --- |
+| Language | Solidity ^0.8.x |
+| Framework | Hardhat, OpenZeppelin (upgradeable) |
+| Tooling | TypeScript, ethers v5, TypeChain |
+| Testing | Mocha / Chai, hardhat-deploy |
+
+## Architecture
+
+```text
+contracts/
+├── core/         # MinerPool, RewardsPool, validators
+├── tokens/       # MTC and wrapped token contracts
+├── helpers/      # Bridge, roles, blacklist utilities
+└── interfaces/   # Shared ABIs for integrators
+```
+
+## Key Features
+
+- **Miner tiers** — Meta, Macro, and Micro miner contracts with staking and health checks.
+- **Reward pools** — tiered distribution based on miner actions on MetaChain.
+- **Validation** — BlockValidator and TxValidator for consensus-style checks.
+- **Cross-chain bridge** — BSC↔MetaChain migration for MTC tokens.
+- **Access control** — role-based permissions with MultiSigWallet support.
+
+## Resources
+
+- [Repository on GitHub](https://github.com/mehmetraufoguz/genesis-contracts)
+- [Metatime Whitepaper](https://docs.metatime.com/whitepaper)

@@ -1,0 +1,50 @@
+---
+title: Pool Contracts
+description: Metatime Coin distribution pools with vesting, claiming, liquidity, and strategic burns.
+date: 2023-05-14
+tags: [solidity, token-distribution, defi, vesting]
+github: https://github.com/mehmetraufoguz/pool-contracts
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+# Pool Contracts [Metatime Coin distribution pools with vesting, claiming, liquidity, and strategic burns.]
+
+*May 14, 2023* · solidity · token-distribution · defi · [View on GitHub →](https://github.com/mehmetraufoguz/pool-contracts)
+
+## Overview
+
+Smart contracts for fair and transparent Metatime Coin (MTC) distribution during coin sales and migration from BSC to MetaChain Mainnet. Handles vesting schedules, claim intervals, liquidity management, and formula-based strategic token burns.
+
+## Tech Stack
+
+| Layer | Technology |
+| --- | --- |
+| Language | Solidity ^0.8.x |
+| Framework | Hardhat, OpenZeppelin (upgradeable) |
+| Tooling | TypeScript, ethers v5, TypeChain |
+| Testing | Mocha / Chai, hardhat-deploy |
+
+## Architecture
+
+```text
+contracts/
+├── core/         # Distributor, TokenDistributor, LiquidityPool
+├── utils/        # StrategicPool (burn logic), PoolFactory
+└── interfaces/   # Shared ABIs
+```
+
+## Key Features
+
+- **Token distribution** — scheduled and instant claim mechanisms with configurable vesting.
+- **Vesting & lock-up** — time-based release to discourage immediate dumping.
+- **Liquidity pool** — owner-controlled fund transfers for sale proceeds.
+- **Strategic burns** — formula-based and manual token burn via StrategicPool.
+- **BSC migration** — snapshot-based claim interval continuity on MetaChain.
+
+## Resources
+
+- [Repository on GitHub](https://github.com/mehmetraufoguz/pool-contracts)
+- [Metatime Whitepaper](https://docs.metatime.com/whitepaper)

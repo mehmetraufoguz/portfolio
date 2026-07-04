@@ -1,0 +1,52 @@
+---
+title: app-documents
+description: Git-backed markdown document platform with magic-link auth and a publishable client SDK.
+date: 2026-03-08
+tags: [documents, git, full-stack, markdown, sdk]
+github: https://github.com/mehmetraufoguz/app-documents
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+# app-documents [Git-backed markdown document platform with magic-link auth and a publishable client SDK.]
+
+*March 8, 2026* · documents · git · full-stack · markdown · [View on GitHub →](https://github.com/mehmetraufoguz/app-documents)
+
+## Overview
+
+Full-stack document management where every edit becomes a Git commit with author, timestamp, and message metadata. Users get version control without needing to know Git. A publishable npm SDK (`app-documents-client`) lets external apps fetch documents via a type-safe public API.
+
+## Tech Stack
+
+| Layer | Technology |
+| --- | --- |
+| Frontend | React 19, TanStack Start / Router |
+| Backend | Nitro, Better Auth |
+| Storage | SQLite, Drizzle ORM, Simple Git |
+| Content | Markdown (Marked) |
+| Packaging | pnpm monorepo, Docker |
+
+## Architecture
+
+```text
+app-documents/
+├── server/       # Full-stack document app
+└── client-sdk/   # Publishable npm package (app-documents-client)
+```
+
+## Key Features
+
+- **Git-backed versioning** — every save creates a commit with optional message.
+- **Version browser** — view and time-travel through the last 5 commits.
+- **Magic-link auth** — passwordless sign-in via Better Auth.
+- **Soft delete** — archived documents stay in Git history for audit.
+- **Public API** — JSON metadata, rendered HTML, and raw markdown endpoints.
+- **Client SDK** — Zod-validated, type-safe document access for React, Expo, and Node.
+
+## Resources
+
+- [Repository on GitHub](https://github.com/mehmetraufoguz/app-documents)
+- [npm: app-documents-client](https://www.npmjs.com/package/app-documents-client)
+- [Docker Hub](https://hub.docker.com/r/mehmetraufoguz/app-documents)
