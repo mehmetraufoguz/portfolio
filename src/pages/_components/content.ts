@@ -25,7 +25,7 @@ export const projects: readonly Project[] = [
     slug: 'aa-news-encoder',
     title: 'aa-news-encoder',
     description:
-      'Turkish news classification pipeline — AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.',
+      'Turkish news classification pipeline with AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.',
     date: '2026-04-30',
     visibility: 'public',
     status: 'completed',
@@ -57,7 +57,7 @@ export const projects: readonly Project[] = [
     slug: 'genesis-contracts',
     title: 'Genesis Contracts',
     description:
-      'MetaChain genesis smart contracts — mining, validation, reward pools, and BSC bridging.',
+      'MetaChain genesis smart contracts for mining, validation, reward pools, and BSC bridging.',
     date: '2023-09-27',
     visibility: 'public',
     status: 'completed',
@@ -79,11 +79,28 @@ export const projects: readonly Project[] = [
 
 export const blogPosts: readonly BlogPost[] = [
   {
-    slug: 'example-post',
-    title: 'Example Post',
-    description: 'A short intro to what this post covers — the package, tool, or idea you are writing about.',
-    date: '2026-01-01',
-    tags: ['template'],
+    slug: 'classifying-turkish-news-with-bert-and-kafka',
+    title: 'Classifying Turkish news with BERT and Kafka',
+    description:
+      'How I wired Anadolu Ajansı ingestion, a fine-tuned Turkish BERT model, and a Kafka pipeline into one working classifier.',
+    date: '2026-08-10',
+    tags: ['nlp', 'turkish', 'bert', 'kafka'],
+  },
+  {
+    slug: 'git-backed-markdown-documents',
+    title: 'Why I store documents as Git commits',
+    description:
+      'Notes on building app-documents, a markdown platform where every save is a commit and apps can pull content through a typed SDK.',
+    date: '2026-08-07',
+    tags: ['documents', 'git', 'markdown', 'sdk'],
+  },
+  {
+    slug: 'token-distribution-pools-vesting-and-burns',
+    title: 'Token distribution pools, vesting, and burns',
+    description:
+      'Lessons from building Metatime Coin pool contracts for sales, lock-ups, liquidity, and strategic burns on the way to MetaChain.',
+    date: '2026-08-04',
+    tags: ['solidity', 'defi', 'vesting', 'token-distribution'],
   },
 ] as const
 

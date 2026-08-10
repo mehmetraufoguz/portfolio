@@ -1,0 +1,55 @@
+---
+title: Classifying Turkish news with BERT and Kafka
+description: How I wired Anadolu Ajansı ingestion, a fine-tuned Turkish BERT model, and a Kafka pipeline into one working classifier.
+date: 2026-08-10
+author: Rauf
+tags: [nlp, turkish, bert, kafka]
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+# Classifying Turkish news with BERT and Kafka [How I wired Anadolu Ajansı ingestion, a fine-tuned Turkish BERT model, and a Kafka pipeline into one working classifier.]
+
+*August 10, 2026* · by Rauf · nlp, turkish, bert, kafka
+
+I wanted a small system that could take Turkish news as it arrives and put each article into a category without me babysitting a notebook. The result is [aa-news-encoder](/projects/aa-news-encoder): AA API in, Kafka in the middle, a fine-tuned Turkish BERT model on the side, and a dashboard that shows what the pipeline is doing.
+
+## The problem
+
+Turkish news classification is awkward if you only train on English-centric stacks. Tokenization, casing, and category boundaries all shift. I also did not want a single process that fetches, classifies, and serves at once. When the model stalls, ingestion should keep going.
+
+## What I built
+
+The shape is boring on purpose:
+
+```text
+AA API → Producer → Kafka → Consumer → Model (FastAPI + gRPC)
+       → PostgreSQL + Redis → NestJS API (REST + SSE) → Dashboard
+```
+
+The producer polls Anadolu Ajansı on a schedule. Redis stores SHA-256 hashes of articles with a three-hour TTL so the same piece does not re-enter the topic. The consumer pulls from Kafka and calls the model over gRPC. Postgres keeps the durable record. The NestJS API exposes REST for reads and SSE for live updates. The React dashboard signs in with a magic link and watches the stream.
+
+The model is `dbmdz/bert-base-turkish-cased`, fine-tuned for seven categories. On my eval set it sat around 87% accuracy. That is good enough for a proof of concept and honest enough not to pretend it is production-grade for every desk.
+
+## Why Kafka instead of a queue in Postgres
+
+I tried the "just write a jobs table" version first. It worked until I wanted to restart the model service without blocking the producer. Kafka made the boundary obvious: producers write, consumers catch up when they can. Docker Compose keeps the whole thing local, which mattered more than fancy infra.
+
+## Dataset work
+
+Training data did not appear by itself. I wrote a small CLI to pull Turkish news sources into labeled sets before fine-tuning. Most of the time went into cleaning labels and deciding what "economy" vs "world" meant for this corpus, not into the Transformers training loop.
+
+## What I would change
+
+- Serve the model behind a proper autoscaled worker if volume ever leaves laptop-demo land.
+- Add human correction feedback so wrong categories can retrain a later checkpoint.
+- Tighten category definitions before claiming product accuracy.
+
+## Links
+
+- [Project page](/projects/aa-news-encoder)
+- [GitHub](https://github.com/mehmetraufoguz/aa-news-encoder)
+- [Docs](https://aa-news-encoder.rauf.app)
+- [Model on HuggingFace](https://huggingface.co/mehmetraufoguz/turkish-news-bert-base)

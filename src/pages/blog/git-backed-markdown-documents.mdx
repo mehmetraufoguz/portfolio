@@ -1,0 +1,48 @@
+---
+title: Why I store documents as Git commits
+description: Notes on building app-documents, a markdown platform where every save is a commit and apps can pull content through a typed SDK.
+date: 2026-08-07
+author: Rauf
+tags: [documents, git, markdown, sdk]
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+# Why I store documents as Git commits [Notes on building app-documents, a markdown platform where every save is a commit and apps can pull content through a typed SDK.]
+
+*August 7, 2026* · by Rauf · documents, git, markdown, sdk
+
+I keep ending up with the same need: write something in markdown, keep history, and let another app read it without inventing a CMS. [app-documents](/projects/app-documents) is my answer so far. The UI feels like a normal editor. Underneath, each save is a Git commit.
+
+## Why Git
+
+Databases are fine for drafts. They are worse when you care about "who changed what" and you already trust Git for code. Commits give you author, timestamp, and message for free. Soft delete still leaves history in the repo, which is what I want for audit trails.
+
+Users do not need to know Git. They hit save. The server runs Simple Git, records the commit, and keeps a short version browser (last five commits) for time travel in the UI.
+
+## Auth and stack
+
+Sign-in is passwordless via Better Auth magic links. The app runs on TanStack Start with a Nitro server, SQLite through Drizzle, and Marked for render. It is a pnpm monorepo with Docker images when I want to ship the whole thing as a box.
+
+## The SDK part
+
+Writing docs in one place is useless if every client scrapes HTML. `app-documents-client` is a publishable npm package with Zod-checked calls for metadata, rendered HTML, and raw markdown. React, Expo, and Node can all pull the same document without copying paste into three repos.
+
+That split mattered more than fancy editor features. One source of truth, typed consumers.
+
+## Trade-offs
+
+Git is not a multiplayer CRDT. Concurrent edits on the same file will hurt. SQLite keeps the app simple and local-friendly, which also means you plan backups yourself. The version browser only surfaces recent commits on purpose; full history still lives in the repo if you dig.
+
+## When I reach for it
+
+Internal docs, changelogs, and content that should move with the codebase. If you need Google Docs collaboration, this is the wrong tool. If you want markdown that other apps can fetch like an API, it fits.
+
+## Links
+
+- [Project page](/projects/app-documents)
+- [GitHub](https://github.com/mehmetraufoguz/app-documents)
+- [npm: app-documents-client](https://www.npmjs.com/package/app-documents-client)
+- [Docker Hub](https://hub.docker.com/r/mehmetraufoguz/app-documents)
