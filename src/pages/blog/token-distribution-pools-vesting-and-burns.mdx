@@ -1,0 +1,54 @@
+---
+title: Token distribution pools, vesting, and burns
+description: Lessons from building Metatime Coin pool contracts for sales, lock-ups, liquidity, and strategic burns on the way to MetaChain.
+date: 2026-08-04
+author: Rauf
+tags: [solidity, defi, vesting, token-distribution]
+layout: full
+outline: 2
+showAskAi: false
+showFeedback: false
+---
+
+# Token distribution pools, vesting, and burns [Lessons from building Metatime Coin pool contracts for sales, lock-ups, liquidity, and strategic burns on the way to MetaChain.]
+
+*August 4, 2026* · by Rauf · solidity, defi, vesting, token-distribution
+
+In 2023 I worked on the on-chain side of Metatime Coin distribution: sale claims, vesting, liquidity handling, and burns, plus the later genesis pieces for MetaChain. The public repos are [pool-contracts](/projects/pool-contracts) and [genesis-contracts](/projects/genesis-contracts). This post is the short version of what actually mattered in the pool layer.
+
+## What the pools had to do
+
+Coin sales are messy if everyone can dump on day one. We needed:
+
+1. Scheduled and instant claim paths with configurable vesting.
+2. Lock-ups that release over time instead of a single unlock cliff for every case.
+3. A liquidity pool path for sale proceeds under owner control.
+4. Strategic burns, both formula-driven and manual, through `StrategicPool`.
+5. Continuity when migrating claim state from BSC toward MetaChain using snapshots.
+
+Hardhat, OpenZeppelin upgradeable contracts, TypeChain, and a normal Mocha suite were the daily tools. Nothing exotic.
+
+## Design notes that stuck
+
+**Separate roles early.** Distribution, liquidity, and burn logic look related in a whitepaper and fight each other in one god contract. Splitting `Distributor` / `TokenDistributor`, `LiquidityPool`, and `StrategicPool` kept reviews saner.
+
+**Vesting is product policy, not a math flex.** The chain only enforces what you encoded. If the schedule is wrong in the spec, perfect Solidity will still ship a bad market outcome.
+
+**Upgradeability has a cost.** Proxies helped when parameters and flows shifted during rollout. They also mean you treat admin keys and upgrade ops as part of the threat model, not an afterthought.
+
+**Migration is state, not a vibe.** Snapshot-based claim continuity sounds simple until you reconcile who already claimed, who is mid-interval, and what happens if a user shows up on the new chain with an old expectation.
+
+## Genesis side, briefly
+
+Genesis contracts covered miner tiers (Meta, Macro, Micro), reward pools, validators, and the BSC↔MetaChain bridge for MTC. Pool work and genesis work shared the same habit: small contracts, clear interfaces, tests that follow the whitepaper paths instead of only happy-path demos.
+
+## What I take into new work
+
+Write the claim and vesting state machine on paper before the first `function`. Keep burn authority narrow. Assume someone will call every public method in the worst order. And document the admin surface like it is user-facing, because it is.
+
+## Links
+
+- [Pool Contracts](/projects/pool-contracts)
+- [Genesis Contracts](/projects/genesis-contracts)
+- [pool-contracts on GitHub](https://github.com/mehmetraufoguz/pool-contracts)
+- [genesis-contracts on GitHub](https://github.com/mehmetraufoguz/genesis-contracts)

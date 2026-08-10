@@ -1,6 +1,6 @@
 ---
 title: aa-news-encoder
-description: Turkish news classification pipeline — AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.
+description: Turkish news classification pipeline with AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.
 date: 2026-04-30
 tags: [nlp, turkish, bert, kafka, machine-learning]
 github: https://github.com/mehmetraufoguz/aa-news-encoder
@@ -12,7 +12,7 @@ showFeedback: false
 
 import { ProjectMeta } from '../_components/project-meta'
 
-# aa-news-encoder [Turkish news classification pipeline — AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.]
+# aa-news-encoder [Turkish news classification pipeline with AA API ingestion, Kafka, fine-tuned BERT, REST/SSE API, and dashboard.]
 
 <ProjectMeta slug="aa-news-encoder" />
 
@@ -40,11 +40,11 @@ AA API → Producer → Kafka → Consumer → Model (FastAPI + gRPC)
 
 ## Key Features
 
-- **Scheduled ingestion** — polls AA News API with Redis deduplication (SHA-256, 3h TTL).
-- **Fine-tuned BERT** — 7-category Turkish news classifier served over FastAPI and gRPC.
-- **Event-driven pipeline** — producer, consumer, and model as separate services.
-- **Management dashboard** — magic-link auth with live SSE updates.
-- **Dataset CLI** — local tool for collecting training data from Turkish news sources.
+- **Scheduled ingestion**: polls AA News API with Redis deduplication (SHA-256, 3h TTL).
+- **Fine-tuned BERT**: 7-category Turkish news classifier served over FastAPI and gRPC.
+- **Event-driven pipeline**: producer, consumer, and model as separate services.
+- **Management dashboard**: magic-link auth with live SSE updates.
+- **Dataset CLI**: local tool for collecting training data from Turkish news sources.
 
 ## Resources
 
